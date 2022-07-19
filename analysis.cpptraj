@@ -1,0 +1,73 @@
+parm /scratch/07418/s3ahn/original/CONFIG/closed.prmtop
+trajin parent.rst
+trajin seg.nc
+autoimage
+
+parm /scratch/07418/s3ahn/original/CONFIG/6VSB_equil.pdb [open]
+reference /scratch/07418/s3ahn/original/CONFIG/6VSB_equil.pdb parm /scratch/07418/s3ahn/original/CONFIG/6VSB_equil.pdb [open]
+
+# align backbone CA to the helical core domain
+rmsd @CA&(:851-888,1050-1071,1090-1138,2151-2188,2350-2371,2390-2438,3439-3476,3638-3659,3678-3726) ref [open] @CA&(@14090-14668,17137-17478,17747-18525,35525-36103,38572-38913,39182-39960,56640-57218,59687-60028,60297-61075)
+
+# calculate RMSD of RBD beta sheets backbone CA 57218
+rmsd RMSDA @CA&(:363-368,382-392,419-426,496-505) ref [open] @CA&(@5683-5780,5959-6135,6533-6646,7712-7883) nofit out rbd_rmsdA.dat
+rmsd RMSDB @CA&(:1658-1663,1677-1687,1714-1721,1791-1800) ref [open] @CA&(@27021-27118,27297-27473,27871-27984,29050-29221) nofit out rbd_rmsdB.dat
+rmsd RMSDC @CA&(:2953-2958,2972-2982,3009-3016,3086-3095) ref [open] @CA&(@48332-48429,48608-48784,49182-49295,50361-50532) nofit out rbd_rmsdC.dat
+
+# distance of RBD beta sheets backbone CA to center of mass of the helical core domain
+distance RBD_COMA @CA&(:851-888,1050-1071,1090-1138,2151-2188,2350-2371,2390-2438,3439-3476,3638-3659,3678-3726) @CA&(:363-368,382-392,419-426,496-505) out rbd_comA.dat
+distance RBD_COMB @CA&(:851-888,1050-1071,1090-1138,2151-2188,2350-2371,2390-2438,3439-3476,3638-3659,3678-3726) @CA&(:1658-1663,1677-1687,1714-1721,1791-1800) out rbd_comB.dat
+distance RBD_COMC @CA&(:851-888,1050-1071,1090-1138,2130-2167,2320-2350,2369-2417,3439-3476,3638-3659,3678-3726) @CA&(:2953-2958,2972-2982,3009-3016,3086-3095) out rbd_comC.dat
+
+# nonbonded energies
+energy (:851-888,1050-1071,1090-1138) coreA_nb out coreA_nb.dat nonbond
+energy (:2151-2188,2350-2371,2390-2438) coreB_nb out coreB_nb.dat nonbond
+energy (:3439-3476,3638-3659,3678-3726) coreC_nb out coreC_nb.dat nonbond
+energy (:363-368,382-392,419-426,496-505) rbdA_nb out rbdA_nb.dat nonbond
+energy (:1658-1663,1677-1687,1714-1721,1791-1800) rbdB_nb out rbdB_nb.dat nonbond
+energy (:2953-2958,2972-2982,3009-3016,3086-3095) rbdC_nb out rbdC_nb.dat nonbond
+
+## salt bridges
+nativecontacts :445@NE,NH2,NH1 :1647@OD1,OD2    name A.R457_B.D364 mindist out A.R457_B.D364_min.dat
+nativecontacts :415@OD1,OD2    :3678@NZ         name A.D427_C.K986 mindist out A.D427_C.K986_min.dat
+nativecontacts :415@OD1,OD2    :3035@NE,NH2,NH1 name A.D427_C.R457 mindist out A.D427_C.R457_min.dat
+nativecontacts :396@NE,NH1,NH2 :3005@OD1,OD2    name A.R408_C.D427 mindist out A.R408_C.D427_min.dat
+nativecontacts :415@OD1,OD2    :2986@NE,NH1,NH2 name A.D427_C.R408 mindist out A.D427_C.R408_min.dat
+nativecontacts :408@OD1,OD2    :446@NZ          name A.D420_A.K458 mindist out A.D420_A.K458_min.dat
+nativecontacts :396@NE,NH1,NH2 :2983@OD1,OD2    name A.R408_C.D405 mindist out A.R408_C.D405_min.dat
+nativecontacts :454@NE,NH1,NH2 :1415@OE1,OE2    name A.R466_B.E132 mindist out A.R466_B.E132_min.dat
+nativecontacts :416@OD1,OD2    :3032@NE,NH1,NH2 name A.D428_C.R454 mindist out A.D428_C.R454_min.dat
+nativecontacts :3678@NZ        :3440@OE1,OE2    name C.K986_C.E748 mindist out C.K986_C.E748_min.dat
+nativecontacts :3678@NZ        :3682@OE1,OE2    name C.K986_C.E990 mindist out C.K986_C.E990_min.dat
+
+## tracing Thr415 contacts
+nativecontacts :403@OG1        :408@OD1,OD2     name A.T415_A.D420 mindist out A.T415_A.D420_min.dat
+nativecontacts :403@OG1        :1652@OH         name A.T415_B.Y369 mindist out A.T415_B.Y369_min.dat
+nativecontacts :403@OG1        :402@OE1,OE2     name A.T415_A.Q414 mindist out A.T415_A.Q414_min.dat
+nativecontacts :403@OG1        :3677@OD1,OD2    name A.T415_C.D985 mindist out A.T415_C.D985_min.dat
+nativecontacts :403@OG1        :3678@NZ         name A.T415_C.K986 mindist out A.T415_C.K986_min.dat
+nativecontacts :403@OG1        :1666@OG         name A.T415_B.S383 mindist out A.T415_B.S383_min.dat
+nativecontacts :403@OG1        :1668@OG1        name A.T415_B.T385 mindist out A.T415_B.T385_min.dat
+
+## hbonds
+nativecontacts :359@OG         :3035@NE,NH1,NH2 name A.S371_C.R457 mindist out A.S371_C.R457_min.dat
+nativecontacts :363@OG         :3035@NE,NH1,NH2 name A.S375_C.R457 mindist out A.S375_C.R457_min.dat
+nativecontacts :357@OH         :3035@NE,NH1,NH2 name A.Y369_C.R457 mindist out A.Y369_C.R457_min.dat
+nativecontacts :450@NZ         :1481@OD1,OD2    name A.K462_B.D198 mindist out A.K462_B.D198_min.dat
+nativecontacts :455@OD1,OD2    :339@OH          name A.D467_A.Y351 mindist out A.D467_A.Y351_min.dat
+nativecontacts :483@OH         :394@OE1,OE2     name A.Y495_A.E406 mindist out A.Y495_A.E406_min.dat
+
+## mindist of hydrophobic interactions with glycans
+nativecontacts :444            :2055-2061       name A.F456_B.N343g mindist out A.F456_B.N343g_min.dat
+nativecontacts :477            :2055-2061       name A.Y489_B.N343g mindist out A.Y489_B.N343g_min.dat
+nativecontacts :478            :2055-2061       name A.F490_B.N343g mindist out A.F490_B.N343g_min.dat
+nativecontacts :445            :2055-2061       name A.R457_B.N343g mindist out A.R457_B.N343g_min.dat
+
+## center of mass distance of hydrophobic interactions with glycans
+distance N343-F456 :2055-2061  :444 out A.F456_B.N343g_com.dat
+distance N343-Y489 :2055-2061  :477 out A.Y489_B.N343g_com.dat
+distance N343-F490 :2055-2061  :478 out A.F490_B.N343g_com.dat
+distance N343-R457 :2055-2061  :445 out A.R457_B.N343g_com.dat
+
+strip :WAT,CLA,SOD
+trajout seg_nosolvent.nc onlyframes 2
