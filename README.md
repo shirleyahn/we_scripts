@@ -6,7 +6,7 @@ These scripts can be used and adapted for other WE simulations\
 \
 CONFIG: contains files needed to start the simulation for each segment/walker\
 bstates: contains initial starting structures for the WE simulation\
-BASIS_STATES lists bstates with probabilities/weights\ 
+BASIS_STATES lists bstates with probabilities/weights\
 analysis.cpptraj is used during runseg.sh to extract progress coordinate and auxdata values at each iteration\
 env.sh sets up the computing environment\
 get_pcoord.sh extracts the progress coordinate values for the initial starting structures (only used for the very first iteration)\
