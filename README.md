@@ -15,4 +15,4 @@ node.sh is used to run the simulations for each node\
 post_iter.sh is used at the post-processing step of each iteration (usually to tar and compress seg_logs and traj_segs)\
 runseg.sh is used to run each segment/walker at each iteration\
 runwe.sh is the main script to submit on the supercomputer cluster to execute the WE simulation\
-west.cfg is the main configuration file for the WE simulation that sets up the number of progress coordinates, number of iterations, etc.\
+west.cfg is the main configuration file for the WE simulation that sets up the number of progress coordinates, number of iterations, etc.
