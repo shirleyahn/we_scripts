@@ -26,6 +26,7 @@ export CUDA_VISIBLE_DEVICES=${CUDA_DEVICES[$WM_PROCESS_INDEX]}
 echo "RUNSEG.SH: CUDA_VISIBLE_DEVICES_ALLOCATED = " $CUDA_VISIBLE_DEVICES_ALLOCATED
 echo "RUNSEG.SH: WM_PROCESS_INDEX = " $WM_PROCESS_INDEX
 echo "RUNSEG.SH: CUDA_VISIBLE_DEVICES = " $CUDA_VISIBLE_DEVICES
+
 $PMEMD -O -p closed.prmtop -i prod.in -c parent.rst -o seg.out -inf seg.nfo -l seg.log -x seg.nc -r seg.rst || exit 1
 
 $CPPTRAJ -i analysis.cpptraj

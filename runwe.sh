@@ -15,8 +15,7 @@ cd $SLURM_SUBMIT_DIR
 source ~/.profile
 export MY_SPECTRUM_OPTIONS="--gpu"
 export PATH=$PATH:$HOME/bin
-#export WEST_ROOT=/scratch/07418/s3ahn/conda_local/westpa
-#source /scratch/07418/s3ahn/conda_local/westpa/westpa.sh
+
 module purge
 module load launcher_gpu/1.1
 module load cuda/10.2
@@ -27,21 +26,17 @@ module load amber/20
 module load conda
 conda activate westpa
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-#export LD_PRELOAD=/opt/apps/gcc7_3/mvapich2-gdr/2.3.4/lib64/libmpi.so
-#export MV2_ENABLE_AFFINITY=0
 export WEST_SIM_ROOT=$SLURM_SUBMIT_DIR
 export PYTHONPATH=/scratch/07418/s3ahn/mdtraj/lib/python3.7/site-packages:/scratch/07418/s3ahn/conda_local/envs/westpa/bin/python
-#export WEST_PYTHON=/scratch/07418/s3ahn/conda_local/bin/python3.8
+
 source env.sh || exit 1
 env | sort
-rm binbounds.txt
+
 SERVER_INFO=$WEST_SIM_ROOT/west_zmq_info-$SLURM_JOBID.json
 
 #TODO: set num_gpu_per_node
 num_gpu_per_node=4
-#cuda_file=$PBS_O_WORKDIR/cuda_devices.txt
 rm -rf nodefilelist.txt
-#rm -rf $cuda_file
 scontrol show hostname $SLURM_JOB_NODELIST > nodefilelist.txt
 
 # start server
@@ -67,4 +62,3 @@ for node in $(cat nodefilelist.txt); do
     ssh -o StrictHostKeyChecking=no $node $PWD/node.sh $SLURM_SUBMIT_DIR $SLURM_JOBID $node $CUDA_VISIBLE_DEVICES --work-manager=zmq --n-workers=$num_gpu_per_node --zmq-mode=client --zmq-read-host-info=$SERVER_INFO --zmq-comm-mode=tcp &
 done
 wait
-

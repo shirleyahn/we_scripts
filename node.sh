@@ -12,10 +12,6 @@ echo "current directory is $PWD"
 echo "environment is: "
 env | sort
 
-#for GPU in "${CUDANODES[@]}" 
-#do 
-    #export CUDA_VISIBLE_DEVICES=$GPU
 echo "CUDA_VISIBLE_DEVICES = " $CUDA_VISIBLE_DEVICES
 w_run "$@" &> west-$SLURM_NODENAME-node.log
 echo "Shutting down.  Hopefully this was on purpose?"
-#done

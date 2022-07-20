@@ -11,7 +11,6 @@ RMSD=$(mktemp)
 COM=$(mktemp)
 COMMAND="           parm $WEST_SIM_ROOT/CONFIG/closed.prmtop \n"
 COMMAND="${COMMAND} trajin $WEST_STRUCT_DATA_REF \n"
-#COMMAND="${COMMAND} strip :WAT,SOD,CLA \n"
 COMMAND="${COMMAND} autoimage \n"
 COMMAND="${COMMAND} parm $WEST_SIM_ROOT/CONFIG/6VSB_equil.pdb [open] \n"
 COMMAND="${COMMAND} reference $WEST_SIM_ROOT/CONFIG/6VSB_equil.pdb parm $WEST_SIM_ROOT/CONFIG/6VSB_equil.pdb [open] \n"
@@ -27,4 +26,3 @@ paste <(cat $COM | tail -n 1 | awk {'print $2'}) <(cat $RMSD | tail -n 1 | awk {
 if [ -n "$SEG_DEBUG" ] ; then
     head -v $WEST_PCOORD_RETURN
 fi
-
