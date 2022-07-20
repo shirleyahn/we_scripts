@@ -1,9 +1,9 @@
 # we_scripts
 
 Originally prepared by Terra Sztain and Surl-Hee Ahn for spike WE simulations 
-with Amber simulation engine 
+with Amber simulation engine \
 Has been further revised for minimal adaptive binning (MAB) scheme
-and WESTPA 2.0 by Surl-Hee Ahn 
+and WESTPA 2.0 by Surl-Hee Ahn \
 These scripts can be used and adapted for other WE simulations
 
 - CONFIG: contains files needed to start the simulation for each segment/walker
