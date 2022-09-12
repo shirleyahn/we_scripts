@@ -9,7 +9,7 @@ reference /scratch/07418/s3ahn/original/CONFIG/6VSB_equil.pdb parm /scratch/0741
 # align backbone CA to the helical core domain
 rmsd @CA&(:851-888,1050-1071,1090-1138,2151-2188,2350-2371,2390-2438,3439-3476,3638-3659,3678-3726) ref [open] @CA&(@14090-14668,17137-17478,17747-18525,35525-36103,38572-38913,39182-39960,56640-57218,59687-60028,60297-61075)
 
-# calculate RMSD of RBD beta sheets backbone CA 57218
+# calculate RMSD of RBD beta sheets backbone CA 
 rmsd RMSDA @CA&(:363-368,382-392,419-426,496-505) ref [open] @CA&(@5683-5780,5959-6135,6533-6646,7712-7883) nofit out rbd_rmsdA.dat
 rmsd RMSDB @CA&(:1658-1663,1677-1687,1714-1721,1791-1800) ref [open] @CA&(@27021-27118,27297-27473,27871-27984,29050-29221) nofit out rbd_rmsdB.dat
 rmsd RMSDC @CA&(:2953-2958,2972-2982,3009-3016,3086-3095) ref [open] @CA&(@48332-48429,48608-48784,49182-49295,50361-50532) nofit out rbd_rmsdC.dat
