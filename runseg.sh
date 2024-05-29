@@ -27,7 +27,9 @@ echo "RUNSEG.SH: CUDA_VISIBLE_DEVICES_ALLOCATED = " $CUDA_VISIBLE_DEVICES_ALLOCA
 echo "RUNSEG.SH: WM_PROCESS_INDEX = " $WM_PROCESS_INDEX
 echo "RUNSEG.SH: CUDA_VISIBLE_DEVICES = " $CUDA_VISIBLE_DEVICES
 
-$PMEMD -O -p closed.prmtop -i prod.in -c parent.rst -o seg.out -inf seg.nfo -l seg.log -x seg.nc -r seg.rst || exit 1
+while ! [grep -q "Final Performance Info" seg.log]; do 
+  $PMEMD -O -i prod.in -o seg.log -p closed.prmtop -c parent.rst -r seg.rst -x seg.nc 
+done
 
 $CPPTRAJ -i analysis.cpptraj
 
